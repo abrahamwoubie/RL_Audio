@@ -29,9 +29,10 @@ for i in range(parameter.how_many_times):
     reward_List = []
     filename = str(grid_size.nRow) + "X" + str(grid_size.nCol) + "_Experiment.txt"
     for episode in range(1,parameter.Number_of_episodes+1):
-        #file = open(filename, 'a')
+        file = open(filename, 'a')
         #done = False
-        state,goal_state,wall = env.reset()
+        #state,goal_state,wall = env.reset()
+        state,goal_state = env.reset()
         if (options.use_samples and options.use_dense):
             state=samples.Extract_Samples(state[0],state[1])
             samples_goal = samples.Extract_Samples(goal_state[0],goal_state[1])
@@ -97,10 +98,10 @@ for i in range(parameter.how_many_times):
 
     #print(Number_of_Episodes)
     #print(Number_of_Iterations)
-    #file.write("Episode = " + str(Number_of_Episodes))
-    #file.write(str(Number_of_Iterations))
-    #file.write('\n')
-    #file.close()
+    file.write("Episode = " + str(Number_of_Episodes))
+    file.write(str(Number_of_Iterations))
+    file.write('\n')
+    file.close()
     list.append(Number_of_Iterations)
     print(list)
 
@@ -128,15 +129,21 @@ Episode_Number = []
 for i in range(1,len(list[0])+1):
     Episode_Number.append(i)
 
+startpos=options.start
+if(startpos==0):
+    start_option="Fixed"
+else:
+    start_option="Random"
+print("Start Option",start_option)
 pylab.plot(Episode_Number, mu, '-b', label='Mean')
 pylab.plot(Episode_Number, std, '-r', label='Standard Deviation')
-pylab.legend(loc='upper left')
+pylab.legend(loc='upper right')
 pylab.ylim(0, max(np.max(mu),np.max(std))+1)
 pylab.xlim(1, np.max(Episode_Number)+1)
 pylab.xlabel('Episode Number')
 pylab.ylabel('Iteration')
-filename=str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times.png'
-#title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start = Fixed, Goal= Fixed, Experiment Carried out = 20X'
-#pylab.suptitle(title, fontsize=12)
-#pylab.savefig(filename)
+filename=str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+'.png'
+title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option +', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
+pylab.suptitle(title, fontsize=12)
+pylab.savefig(filename)
 pylab.show()

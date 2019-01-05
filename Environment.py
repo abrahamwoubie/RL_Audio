@@ -22,15 +22,18 @@ class Environment:
 
     def reset(self):
         # Reset agent state to top-left grid corner
-        self.state = (0, 0)
+        if(options.start==0):
+            self.state = (0, 0)
+        else:
+            start_row = random.choice(range(0, grid_size.nRow - 1))
+            start_col = random.choice(range(0, grid_size.nCol - 1))
+            self.state = (start_row, start_col)
+
         self.goal_state=(grid_size.nRow-1,grid_size.nCol-1)
-        self.wall=(1,1)
-        #
-        # start_row = random.choice(range(0, grid_size.nRow - 1))
-        # start_col = random.choice(range(0, grid_size.nCol - 1))
-        # #
-        # goal_row = random.choice(range(0, grid_size.nRow - 1))
-        # goal_col = random.choice(range(0, grid_size.nCol - 1))
+
+        #self.wall=(1,1)
+        #goal_row = random.choice(range(0, grid_size.nRow - 1))
+        #goal_col = random.choice(range(0, grid_size.nCol - 1))
         # #
         #
         # wall_row=random.choice(range(0,grid_size.nRow-1))
@@ -45,11 +48,11 @@ class Environment:
         #     wall_col = random.choice(range(0, grid_size.nCol - 1))
 
         #
-        # self.state = (start_row, start_col)
-        # self.goal_state=(goal_row,goal_col)
-        # self.wall = (wall_row,wall_col)
+        #self.state = (start_row, start_col)
+        #self.goal_state=(goal_row,goal_col)
+        #self.wall = (wall_row,wall_col)
 
-        return self.state, self.goal_state,self.wall
+        return self.state, self.goal_state#,self.wall
 
     def step(self, action,samples_goal):
 

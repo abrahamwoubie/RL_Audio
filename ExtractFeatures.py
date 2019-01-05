@@ -58,7 +58,7 @@ class Extract_Features:
             spectrogram = spectrogram + row + col
         return spectrogram
 
-    def Extract_Pitch(row,col):
+    def Extract_Pitch1(row,col):
         from aubio import source, pitch
 
         filename = 'Test.wav'
@@ -99,7 +99,7 @@ class Extract_Features:
             if read < hop_s: break
         return pitches
 
-    def Extract_Pitch1(row, col):
+    def Extract_Pitch(row, col):
 
         pitch_List = []
         sample_rate = 44100

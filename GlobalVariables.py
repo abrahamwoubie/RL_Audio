@@ -11,18 +11,20 @@ class GlobalVariables :
     use_CNN_2D=0
     #Grid Size
 
-    nRow = 15
-    nCol = 15
+    nRow = 20
+    nCol = 20
+
+    start=1  #0 for fixted start position and 1 for random start position
 
     #parameters
     sample_state_size = 100
-    pitch_state_size= 114
+    pitch_state_size= 87#114
     spectrogram_length=129
     spectrogram_state_size= 259
     raw_data_state_size= 100
     action_size = 4
     batch_size = 32
     Number_of_episodes=100
-    timesteps=100#50#(nRow+nCol+nRow)
-    how_many_times = 3 #How many times to run the same experiment
+    timesteps=200#50#(nRow+nCol+nRow)
+    how_many_times = 10 #How many times to run the same experiment
 
