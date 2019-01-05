@@ -134,6 +134,13 @@ if(startpos==0):
     start_option="Fixed"
 else:
     start_option="Random"
+
+goalpos=options.goal
+if(goalpos==0):
+    goal_option="Fixed"
+else:
+    goal_option="Random"
+
 print("Start Option",start_option)
 pylab.plot(Episode_Number, mu, '-b', label='Mean')
 pylab.plot(Episode_Number, std, '-r', label='Standard Deviation')
@@ -142,8 +149,8 @@ pylab.ylim(0, max(np.max(mu),np.max(std))+1)
 pylab.xlim(1, np.max(Episode_Number)+1)
 pylab.xlabel('Episode Number')
 pylab.ylabel('Iteration')
-filename=str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+'.png'
-title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option +', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
+filename=str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ 'goal_'+goal_option+'.png'
+title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
 pylab.suptitle(title, fontsize=12)
 pylab.savefig(filename)
 pylab.show()

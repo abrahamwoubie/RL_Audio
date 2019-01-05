@@ -29,7 +29,13 @@ class Environment:
             start_col = random.choice(range(0, grid_size.nCol - 1))
             self.state = (start_row, start_col)
 
-        self.goal_state=(grid_size.nRow-1,grid_size.nCol-1)
+        if(options.goal==0):
+            self.goal_state=(grid_size.nRow-1,grid_size.nCol-1)
+        else:
+            goal_row = random.choice(range(0, grid_size.nRow - 1))
+            goal_col = random.choice(range(0, grid_size.nCol - 1))
+            self.goal_state = (goal_row, goal_col)
+
 
         #self.wall=(1,1)
         #goal_row = random.choice(range(0, grid_size.nRow - 1))
