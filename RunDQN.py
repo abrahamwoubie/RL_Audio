@@ -5,7 +5,7 @@ from GlobalVariables import GlobalVariables
 from DQNAgent import DQNAgent
 import numpy as np
 import matplotlib.pyplot as plt
-import pylab
+#import pylab
 import sys
 
 import matplotlib.pylab as plt
@@ -27,9 +27,9 @@ for i in range(parameter.how_many_times):
     Number_of_Iterations=[]
     Number_of_Episodes=[]
     reward_List = []
-    filename = str(grid_size.nRow) + "X" + str(grid_size.nCol) + "_Experiment.txt"
+    #filename = str(grid_size.nRow) + "X" + str(grid_size.nCol) + "_Experiment.txt"
     for episode in range(1,parameter.Number_of_episodes+1):
-        file = open(filename, 'a')
+        #file = open(filename, 'a')
         #done = False
         #state,goal_state,wall = env.reset()
         state,goal_state = env.reset()
@@ -98,10 +98,10 @@ for i in range(parameter.how_many_times):
 
     #print(Number_of_Episodes)
     #print(Number_of_Iterations)
-    file.write("Episode = " + str(Number_of_Episodes))
-    file.write(str(Number_of_Iterations))
-    file.write('\n')
-    file.close()
+    # file.write("Episode = " + str(Number_of_Episodes))
+    # file.write(str(Number_of_Iterations))
+    # file.write('\n')
+    #file.close()
     list.append(Number_of_Iterations)
     print(list)
 
@@ -141,16 +141,17 @@ if(goalpos==0):
 else:
     goal_option="Random"
 
-print("Start Option",start_option)
-pylab.plot(Episode_Number, mu, '-b', label='Mean')
-pylab.plot(Episode_Number, std, '-r', label='Standard Deviation')
-pylab.legend(loc='upper right')
-pylab.ylim(0, max(np.max(mu),np.max(std))+1)
-pylab.xlim(1, np.max(Episode_Number)+1)
-pylab.xlabel('Episode Number')
-pylab.ylabel('Iteration')
-filename=str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ 'goal_'+goal_option+'.png'
+plt.plot(Episode_Number, mu, '-b', label='Mean')
+plt.plot(Episode_Number, std, '-r', label='Standard Deviation')
+plt.legend(loc='upper right')
+plt.ylim(0, max(np.max(mu),np.max(std))+1)
+plt.xlim(1, np.max(Episode_Number)+1)
+plt.xlabel('Episode Number')
+plt.ylabel('Iteration')
+filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ 'goal_'+goal_option+'.png'
 title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
-pylab.suptitle(title, fontsize=12)
-pylab.savefig(filename)
-pylab.show()
+plt.suptitle(title, fontsize=12)
+plt.savefig(filename_curve)
+plt.show(block=False)
+plt.pause(3)
+plt.close()
