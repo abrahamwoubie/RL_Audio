@@ -105,7 +105,7 @@ class Extract_Features:
         return pitch_List
 
 
-    def Extract_Spectrogrammmm(row,col):
+    def Extract_Spectrogram(row,col):
         sample_rate, data = scipy.io.wavfile.read('Test.wav')
         # Spectrogram of .wav file
         sample_freq, segment_time, spec_data = signal.spectrogram(data, sample_rate)
@@ -167,8 +167,8 @@ class Extract_Features:
         raw_data = sound._data
         return raw_data
 
-    #def Extract_MFCC(row,col):
-    def Extract_Spectrogram(row,col):
+    def Extract_MFCC(row,col):
+    #def Extract_Spectrogram(row,col):
         import sys
         from aubio import source, pvoc, mfcc
         from numpy import vstack, zeros, diff

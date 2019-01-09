@@ -102,7 +102,9 @@ for i in range(parameter.how_many_times):
     # file.write(str(Number_of_Iterations))
     # file.write('\n')
     #file.close()
-    list.append(Number_of_Iterations)
+    
+    #list.append(Number_of_Iterations)
+    list.append(reward_List)
     print(list)
 
     percentage_of_successful_episodes = (sum(reward_List) / parameter.Number_of_episodes) * 100
@@ -124,6 +126,9 @@ for i in range(parameter.how_many_times):
 
 mu=np.mean(list, axis=0)
 std=np.std(list, axis=0)
+
+print("Mean",mu)
+print("Std",std)
 
 Episode_Number = []
 for i in range(1,len(list[0])+1):
@@ -148,7 +153,7 @@ plt.ylim(0, max(np.max(mu),np.max(std))+1)
 plt.xlim(1, np.max(Episode_Number)+1)
 plt.xlabel('Episode Number')
 plt.ylabel('Iteration')
-filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ 'goal_'+goal_option+'.png'
+filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ '_goal_'+goal_option+'.png'
 title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
 plt.suptitle(title, fontsize=12)
 plt.savefig(filename_curve)
