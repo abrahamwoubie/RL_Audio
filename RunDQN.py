@@ -114,8 +114,10 @@ for i in range(parameter.how_many_times):
     fig.suptitle('Q-Learning', fontsize=12)
     title=str(grid_size.nRow) + "X" + str(grid_size.nCol) + '_'+ str(i+1)
     fig.suptitle(title, fontsize=12)
-    plt.plot(np.arange(len(Number_of_Episodes)), Number_of_Iterations)
-    plt.ylabel('Number of Iterations')
+    #plt.plot(np.arange(len(Number_of_Episodes)), Number_of_Iterations)
+    plt.plot(np.arange(len(Number_of_Episodes)), reward_List)
+    #plt.ylabel('Number of Iterations')
+    plt.ylabel('Reward')
     plt.xlabel('Episode Number')
     filename=title+'.png'
     #plt.savefig(filename)
@@ -128,7 +130,6 @@ mu=np.mean(list, axis=0)
 std=np.std(list, axis=0)
 
 print("Mean",mu)
-print("Std",std)
 
 Episode_Number = []
 for i in range(1,len(list[0])+1):
@@ -157,6 +158,7 @@ filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+
 title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
 plt.suptitle(title, fontsize=12)
 plt.savefig(filename_curve)
-plt.show(block=False)
-plt.pause(3)
-plt.close()
+plt.show()
+#plt.show(block=False)
+#plt.pause(3)
+#plt.close()
