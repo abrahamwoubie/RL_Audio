@@ -130,6 +130,7 @@ mu=np.mean(list, axis=0)
 std=np.std(list, axis=0)
 
 print("Mean",mu)
+print("Std",std)
 
 Episode_Number = []
 for i in range(1,len(list[0])+1):
@@ -147,18 +148,31 @@ if(goalpos==0):
 else:
     goal_option="Random"
 
-plt.plot(Episode_Number, mu, '-b', label='Mean')
-plt.plot(Episode_Number, std, '-r', label='Standard Deviation')
-plt.legend(loc='upper right')
-plt.ylim(0, max(np.max(mu),np.max(std))+1)
-plt.xlim(1, np.max(Episode_Number)+1)
-plt.xlabel('Episode Number')
-plt.ylabel('Iteration')
-filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ '_goal_'+goal_option+'.png'
-title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
-plt.suptitle(title, fontsize=12)
-plt.savefig(filename_curve)
+# plt.plot(Episode_Number, mu, '-b', label='Mean')
+# plt.plot(Episode_Number, std, '-r', label='Standard Deviation')
+# plt.legend(loc='upper right')
+# plt.ylim(0, max(np.max(mu),np.max(std))+1)
+# plt.xlim(1, np.max(Episode_Number)+1)
+# plt.xlabel('Episode Number')
+# plt.ylabel('Reward')
+# filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ '_goal_'+goal_option+'.png'
+# title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
+# plt.suptitle(title, fontsize=12)
+# plt.savefig(filename_curve)
+# plt.show()
+# #plt.show(block=False)
+# #plt.pause(3)
+# #plt.close()
+
+time = np.arange(np.max(Episode_Number))
+
+
+# plot it!
+fig, ax = plt.subplots(1)
+ax.plot(time, mu, lw=2, alpha=0.5,label='Mean Reward', color='red')
+ax.fill_between(time, mu, mu+std, facecolor='blue', alpha=0.5)
+ax.legend(loc='upper right')
+ax.set_xlabel('Number of Episodes')
+ax.set_ylabel('Reward')
+ax.grid()
 plt.show()
-#plt.show(block=False)
-#plt.pause(3)
-#plt.close()
