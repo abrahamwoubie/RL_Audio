@@ -19,7 +19,9 @@ grid_size=GlobalVariables #To access the size of grid from Global Variables.py
 
 env = Environment(grid_size.nRow,grid_size.nCol)
 agent = DQNAgent(env)
-list=[]
+
+list_Number_of_Iterations=[]
+list_Reward=[]
 
 for i in range(parameter.how_many_times):
     print("************************************************************************************")
@@ -103,9 +105,9 @@ for i in range(parameter.how_many_times):
     # file.write('\n')
     #file.close()
     
-    #list.append(Number_of_Iterations)
-    list.append(reward_List)
-    print(list)
+    list_Number_of_Iterations.append(Number_of_Iterations)
+    list_Reward.append(reward_List)
+    #print(list)
 
     percentage_of_successful_episodes = (sum(reward_List) / parameter.Number_of_episodes) * 100
     print("Percentage of Successful Episodes at Iteration {} is {} {}".format(i+1,percentage_of_successful_episodes, '%'))
@@ -114,10 +116,10 @@ for i in range(parameter.how_many_times):
     fig.suptitle('Q-Learning', fontsize=12)
     title=str(grid_size.nRow) + "X" + str(grid_size.nCol) + '_'+ str(i+1)
     fig.suptitle(title, fontsize=12)
-    #plt.plot(np.arange(len(Number_of_Episodes)), Number_of_Iterations)
-    plt.plot(np.arange(len(Number_of_Episodes)), reward_List)
-    #plt.ylabel('Number of Iterations')
-    plt.ylabel('Reward')
+    plt.plot(np.arange(len(Number_of_Episodes)), Number_of_Iterations)
+    #plt.plot(np.arange(len(Number_of_Episodes)), reward_List)
+    plt.ylabel('Number of Iterations')
+    #plt.ylabel('Reward')
     plt.xlabel('Episode Number')
     filename=title+'.png'
     #plt.savefig(filename)
@@ -126,13 +128,17 @@ for i in range(parameter.how_many_times):
     plt.close()
     print("************************************************************************************")
 
-mu=np.mean(list, axis=0)
-std=np.std(list, axis=0)
+mu_Iteration=np.mean(list_Number_of_Iterations, axis=0)
+std_Iteration=np.std(list_Number_of_Iterations, axis=0)
 
-print("Mean",mu)
+mu_Reward=np.mean(list_Reward, axis=0)
+std_Reward=np.std(list_Reward, axis=0)
+
+#print("Mean",mu_Iteration)
+#print("Std",std_Iteration)
 
 Episode_Number = []
-for i in range(1,len(list[0])+1):
+for i in range(1,len(list_Number_of_Iterations[0])+1):
     Episode_Number.append(i)
 
 startpos=options.start
@@ -147,18 +153,37 @@ if(goalpos==0):
 else:
     goal_option="Random"
 
-plt.plot(Episode_Number, mu, '-b', label='Mean')
-plt.plot(Episode_Number, std, '-r', label='Standard Deviation')
-plt.legend(loc='upper right')
-plt.ylim(0, max(np.max(mu),np.max(std))+1)
-plt.xlim(1, np.max(Episode_Number)+1)
-plt.xlabel('Episode Number')
-plt.ylabel('Iteration')
+# plt.plot(Episode_Number, mu, '-b', label='Mean')
+# plt.plot(Episode_Number, std, '-r', label='Standard Deviation')
+# plt.legend(loc='upper right')
+# plt.ylim(0, max(np.max(mu),np.max(std))+1)
+# plt.xlim(1, np.max(Episode_Number)+1)
+# plt.xlabel('Episode Number')
+# plt.ylabel('Reward')
+# filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ '_goal_'+goal_option+'.png'
+# title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
+# plt.suptitle(title, fontsize=12)
+# plt.savefig(filename_curve)
+# plt.show()
+# #plt.show(block=False)
+# #plt.pause(3)
+# #plt.close()
+
 filename_curve='./Learning_Curves/'+str(grid_size.nRow)+'X'+str(grid_size.nCol)+'_'+str(parameter.how_many_times)+'_times_'+'start_'+start_option+ '_goal_'+goal_option+'.png'
-title='Grid Size = '+str(grid_size.nRow) + 'X'+str(grid_size.nCol)+', Start =' + start_option + ', Goal =' + goal_option + ', Experiment Carried out = '+ str(parameter.how_many_times)+' times'
-plt.suptitle(title, fontsize=12)
+
+time = np.arange(np.max(Episode_Number))
+
+
+# plot it!
+#fig, ax = plt.subplots(1)
+plt.plot(time, mu_Iteration, lw=2, alpha=0.5,label='Mean Iteration per Episdoe', color='red')
+plt.plot(time,mu_Reward,color='green',label='Mean Reward per Episode')
+plt.fill_between(time, mu_Iteration-std_Iteration, mu_Iteration+std_Iteration, facecolor='blue', alpha=0.3)
+plt.legend(loc='upper right')
+plt.xlabel('Number of Episodes')
+#plt.ylabel('Mean Iteration')
+plt.grid()
 plt.savefig(filename_curve)
 plt.show()
-#plt.show(block=False)
-#plt.pause(3)
-#plt.close()
+
+

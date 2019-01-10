@@ -11,8 +11,8 @@ class GlobalVariables :
     use_CNN_2D=0
     #Grid Size
 
-    nRow = 2
-    nCol = 2
+    nRow = 10
+    nCol = 10
 
     start=0  #0 for fixed start position and 1 for random start position
     goal=0 #0 for fixed goal position and 1 for random goal position
@@ -25,7 +25,7 @@ class GlobalVariables :
     raw_data_state_size= 100
     action_size = 4
     batch_size = 32
-    Number_of_episodes=30
-    timesteps=10#50#(nRow+nCol+nRow)
-    how_many_times = 2 #How many times to run the same experiment
+    Number_of_episodes=100
+    timesteps=30#50#(nRow+nCol+nRow)
+    how_many_times = 5 #How many times to run the same experiment
 
